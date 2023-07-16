@@ -1,0 +1,40 @@
+import com.example.droolsdemo.model.Order;
+import com.example.droolsdemo.enums.CardType;
+
+dialect "mvel"
+
+rule "card type is mastercard"
+    when
+        order : Order(cardType == CardType.MASTERCARD)
+    then
+        System.out.println("==========Adding 10% discount for mastercard=============");
+        order.setDiscount(10d);
+        order.setDiscountPrice(order.getPrice() * .9);
+end
+
+rule "card type is visa"
+    when
+        order : Order(cardType == CardType.VISA)
+    then
+        System.out.println("==========Adding 15% discount for visa=============");
+        order.setDiscount(15d);
+        order.setDiscountPrice(order.getPrice() * .85);
+end
+
+rule "card type is humo"
+    when
+        order : Order(cardType == CardType.HUMO)
+    then
+        System.out.println("==========Adding 8% discount for humo=============");
+        order.setDiscount(8d);
+        order.setDiscountPrice(order.getPrice() * .92);
+end
+
+rule "card type is uzcard"
+    when
+        order : Order(cardType == CardType.UZCARD)
+    then
+        System.out.println("==========Adding 5% discount for humo=============");
+        order.setDiscount(5d);
+        order.setDiscountPrice(order.getPrice() * .5 );
+end
